@@ -1,6 +1,11 @@
-// var qr = require('qr-image');
-// var fs = require('fs');
+var qr = require('qr-encode');
+var $ = require("jquery");
 
-// qr.image("Funny Valentine", { type: 'png',size:14 }).pipe(fs.createWriteStream('myQrCode.png'));
-require('./module')
-console.log(require('qr-encode'))
+$("#buttonQR").on('click',() => {
+    $("#palace").hide();
+    var text = $("#textQR").val();
+    var dataURI = qr(location.href, {type: 6, size: 6, level: 'H'});
+    var img = new Image();
+    img.src = dataURI;
+    document.body.appendChild(img);
+});
