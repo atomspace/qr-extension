@@ -1,0 +1,40 @@
+{
+	"manifest_version": 2,
+	"version": "0.1.0",
+	"name": "QR Extension",
+	"short_name": "QR Extension",
+	"description": "",
+	"author": "Atomspace",
+	"content_scripts": [
+		{
+			"matches": ["<all_urls>"],
+			"js": ["runtime.js", "polyfill.js", "content.js"],
+			"all_frames": true
+		}
+	],
+	"permissions": [
+		"tabs"
+	],
+	"page_action": {
+		"browser_style": true,
+		"default_icon": {
+			"19": "static/icons/icon.svg",
+			"38": "static/icons/icon.svg"
+		},
+		"default_title": "QR",
+		"default_popup": "page-popup.html"
+	},
+	"icons": {
+		"16": "static/icons/icon.svg",
+		"24": "static/icons/icon.svg",
+		"32": "static/icons/icon.svg",
+		"48": "static/icons/icon.svg",
+		"128": "static/icons/icon.svg"
+	},
+	"content_security_policy": "script-src 'self'; object-src 'self'",
+	"web_accessible_resources": [
+		"images/*.png",
+		"fonts/*.woff2",
+		"fonts/*.woff"
+	]
+}

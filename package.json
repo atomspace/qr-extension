@@ -1,6 +1,6 @@
 {
   "name": "qr-extension",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A browser extension to generate a QR-code from the page address",
   "main": "index.js",
   "scripts": {
@@ -25,6 +25,6 @@
   },
   "devDependencies": {
     "neutrino": "8.2.0",
-    "@neutrinojs/web": "8.2.0"
+    "neutrino-preset-webextension": "./neutrino/neutrino-preset-webextension"
   }
 }
