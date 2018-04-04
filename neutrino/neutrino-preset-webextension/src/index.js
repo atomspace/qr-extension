@@ -27,8 +27,9 @@ module.exports = function (neutrino, settings = {}) {
 	let lintRule = config.module.rules.get('lint')
 	let eslintLoader = lintRule && lintRule.uses.get('eslint')
 	let staticDirPath = path.join(neutrino.options.source, 'static')
+	let localesDirPath = path.join(neutrino.options.source, '_locales')
 	let mains = {
-		// 'background': path.resolve(neutrino.options.source, 'background'),
+		'background': path.resolve(neutrino.options.source, 'background'),
 		'content': path.resolve(neutrino.options.source, 'content'),
 		// 'browser-popup': path.resolve(neutrino.options.source, 'browser-popup'),
 		'page-popup': path.resolve(neutrino.options.source, 'page-popup'),
@@ -132,10 +133,23 @@ module.exports = function (neutrino, settings = {}) {
 	neutrino.use(clean, { paths: [neutrino.options.output] })
 	neutrino.use(webextensionManifest)
 	neutrino.use(copy, {
+		options: {
+			pluginId: 'copy-static'
+		},
 		patterns: [{
 			context: staticDirPath,
 			from: '**/*',
 			to: path.basename(staticDirPath)
+		}]
+	})
+	neutrino.use(copy, {
+		options: {
+			pluginId: 'copy-locales'
+		},
+		patterns: [{
+			context: localesDirPath,
+			from: '**/*',
+			to: path.basename(localesDirPath)
 		}]
 	})
 
@@ -147,7 +161,7 @@ module.exports = function (neutrino, settings = {}) {
 		// neutrino.use(hotReload, settings.server)
 	}
 	else {
-		neutrino.use(minify)
+		// neutrino.use(minify)
 	}
 
 	if (eslintLoader) {

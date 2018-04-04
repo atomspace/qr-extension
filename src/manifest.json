@@ -1,40 +1,33 @@
 {
-	"manifest_version": 2,
-	"version": "0.1.0",
 	"name": "QR Extension",
 	"short_name": "QR Extension",
-	"description": "",
-	"author": "Atomspace",
+	"background": {
+		"scripts": ["background.js"]
+	},
 	"content_scripts": [
 		{
 			"matches": ["<all_urls>"],
-			"js": ["runtime.js", "polyfill.js", "content.js"],
-			"all_frames": true
+			"js": ["content.js"]
 		}
 	],
-	"permissions": [
-		"tabs"
-	],
 	"page_action": {
-		"browser_style": true,
-		"default_icon": {
-			"19": "static/icons/icon.svg",
-			"38": "static/icons/icon.svg"
-		},
-		"default_title": "QR",
-		"default_popup": "page-popup.html"
+		"default_title": "URL to QR"
 	},
+	"permissions": [
+		"contextMenus",
+		"topSites",
+		"activeTab"
+	],
 	"icons": {
-		"16": "static/icons/icon.svg",
-		"24": "static/icons/icon.svg",
-		"32": "static/icons/icon.svg",
-		"48": "static/icons/icon.svg",
-		"128": "static/icons/icon.svg"
+		"16": "static/icons/icon-16.png",
+		"24": "static/icons/icon-24.png",
+		"19": "static/icons/icon-19.png",
+		"32": "static/icons/icon-32.png",
+		"38": "static/icons/icon-38.png",
+		"48": "static/icons/icon-48.png",
+		"128": "static/icons/icon-128.png"
 	},
-	"content_security_policy": "script-src 'self'; object-src 'self'",
-	"web_accessible_resources": [
-		"images/*.png",
-		"fonts/*.woff2",
-		"fonts/*.woff"
-	]
+	"omnibox": {
+		"keyword": "qr"
+	}
 }
