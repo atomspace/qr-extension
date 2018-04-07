@@ -17,6 +17,7 @@ let hotReload = require('./hot-reload.js')
 let babel = require('./babel.js')
 let htmlTemplate = require('./html-template.js')
 let webextensionManifest = require('./webextension-manifest.js')
+let livereload =  require('./livereload.js')
 
 module.exports = function (neutrino, settings = {}) {
 	const NODE_MODULES = path.resolve(__dirname, '../node_modules')
@@ -64,7 +65,7 @@ module.exports = function (neutrino, settings = {}) {
 	})
 
 	config
-		.devtool(devRun ? 'eval-source-map' : 'source-map')
+		.devtool(devRun ? 'inline-source-map' : 'source-map')
 		.target('web')
 		.context(neutrino.options.root)
 		.entry('polyfill')
@@ -122,7 +123,7 @@ module.exports = function (neutrino, settings = {}) {
 	})
 	pages.forEach(function(name, index) {
 		neutrino.use(htmlTemplate, {
-			plugin: `html-${index}`,
+			id: index,
 			filename: `${name}.html`,
 			chunks: [name, 'runtime', 'polyfill']
 		})
@@ -159,6 +160,7 @@ module.exports = function (neutrino, settings = {}) {
 
 	if (devRun) {
 		// neutrino.use(hotReload, settings.server)
+		neutrino.use(livereload)
 	}
 	else {
 		// neutrino.use(minify)
@@ -169,12 +171,7 @@ module.exports = function (neutrino, settings = {}) {
 			.pre()
 		eslintLoader
 			.tap(mergeWith({
-				envs: ['browser', 'commonjs'],
-				parserOptions: {
-					ecmaFeatures: {
-						experimentalObjectRestSpread: true
-					}
-				}
+				envs: ['browser', 'commonjs', 'webextensions']
 			}))
 	}
 }
