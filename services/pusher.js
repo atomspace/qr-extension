@@ -1,14 +1,12 @@
 var qr = require('qr-encode');
 var $ = require("jquery");
+var generator = require('./generator.js');
 
-browser.pageAction.onClicked.addListener(() => {
 $("#buttonQR").on('click',() => {
-//    $("#palace").hide();
     var img = new Image();
-    img.src = dataURI;
+    img.src = generator.generate();
     document.body.appendChild(img);
     setTimeout(() => {
         document.body.removeChild(img);
     },10000);
-});
 });
