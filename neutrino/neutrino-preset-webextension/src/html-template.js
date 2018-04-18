@@ -11,7 +11,7 @@ module.exports = function (neutrino, settings = {}) {
 	let chunkOrder = ['runtime', 'polyfill']
 
 	neutrino.config
-		.plugin(settings.plugin || 'html')
+		.plugin(settings.id ? `html-${settings.id}` : 'html')
 			.use(HtmlWebpackPlugin, [deepmerge({
 				title: `${name} ${version || ''}`,
 				filename: `index.html`,

@@ -15,7 +15,7 @@ module.exports = function(manifest){
 	if (typeof pageActionIcon === 'string') {
 		manifest.page_action.default_icon = {
 			'19': pageActionIcon,
-			'38':pageActionIcon
+			'38': pageActionIcon
 		}
 	}
 	if (typeof sidebarActionIcon === 'string') {
