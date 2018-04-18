@@ -1,16 +1,12 @@
-let path = require('path')
+'use strict'
+
 let GenerateJsonPlugin = require('generate-json-webpack-plugin')
 let deepmerge = require('deepmerge')
-let safeRequire = require('./utils/safe-require.js')
-let normalizeManifest = require('./utils/normalize-manifest')
 
-module.exports = function (neutrino) {
+module.exports = function (neutrino, extensionManifest = {}) {
 	const MANIFEST_NAME = 'manifest.json'
 	let devRun = (process.env.NODE_ENV === 'development')
 	let npmManifest = neutrino.options.packageJson
-	let extensionManifest = normalizeManifest(
-		safeRequire(neutrino.options.source + '/manifest.json')
-	) || {}
 	let manifest = {
 		manifest_version: 2,
 		version: npmManifest.version,
