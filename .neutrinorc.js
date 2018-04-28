@@ -1,5 +1,7 @@
 module.exports = {
 	use: [
-		'neutrino-preset-webextension'
+	  '@atomspace/eslint',
+	  '@neutrinojs/web',
+	  'neutrino-preset-webextension'
 	]
-}
+  };
