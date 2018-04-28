@@ -25,6 +25,7 @@
 		"32": "static/icons/icon-32.png",
 		"38": "static/icons/icon-38.png",
 		"48": "static/icons/icon-48.png",
+		"64": "static/icons/icon-64.png",
 		"128": "static/icons/icon-128.png"
 	},
 	"omnibox": {

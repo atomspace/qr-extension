@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/atomspaceodua/qr-extension#readme",
   "dependencies": {
+    "generate-json-webpack-plugin": "^0.3.1",
     "jquery": "^3.3.1",
     "qr-encode": "0.3.0"
   },

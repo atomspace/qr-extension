@@ -1,15 +1,12 @@
-let path = require('path')
+'use strict'
+
 let GenerateJsonPlugin = require('generate-json-webpack-plugin')
 let deepmerge = require('deepmerge')
-let safeRequire = require('./utils/safe-require.js')
-let normalizeManifest = require('./utils/normalize-manifest')
 
-module.exports = function (neutrino) {
+module.exports = function (neutrino, extensionManifest = {}) {
 	const MANIFEST_NAME = 'manifest.json'
+	let devRun = (process.env.NODE_ENV === 'development')
 	let npmManifest = neutrino.options.packageJson
-	let extensionManifest = normalizeManifest(
-		safeRequire(neutrino.options.source + '/manifest.json')
-	) || {}
 	let manifest = {
 		manifest_version: 2,
 		version: npmManifest.version,
@@ -19,6 +16,7 @@ module.exports = function (neutrino) {
 		homepage_url: npmManifest.homepage,
 
 		background: extensionManifest.background ? {
+			persistent: true, //https://developer.chrome.com/extensions/event_pages
 			scripts: ['runtime.js', 'polyfill.js']
 		} : undefined,
 
@@ -31,7 +29,7 @@ module.exports = function (neutrino) {
 		] : undefined,
 
 		browser_action: extensionManifest.browser_action ? {
-			browser_style: false,
+			// browser_style: false,
 			default_icon: {
 				'16': extensionManifest.icons[16],
 				'32': extensionManifest.icons[32],
@@ -42,7 +40,7 @@ module.exports = function (neutrino) {
 		} : undefined,
 
 		page_action: extensionManifest.page_action ?  {
-			browser_style: false,
+			// browser_style: false, 
 			default_icon: {
 				'19': extensionManifest.icons[19],
 				'38': extensionManifest.icons[38]
@@ -65,26 +63,38 @@ module.exports = function (neutrino) {
 			// 'default_panel': 'sidebar/sidebar.html'
 		} : undefined,
 
-		// icons: {
-		// 	'16': 'static/icons/icon.svg',
-		// 	'24': 'static/icons/icon.svg',
-		// 	'32': 'static/icons/icon.svg',
-		// 	'48': 'static/icons/icon.svg',
-		// 	'64': 'static/icons/icon.svg',
-		// 	'128': 'static/icons/icon.svg'
-		// },
+		// permissions: devRun ? [
+		// 	'*://localhost/*',
+		// 	'*://127.0.0.1/*'
+		// ]: [],
+
 		content_security_policy: 'script-src \'self\'; object-src \'self\'',
-		web_accessible_resources: ['static/**/*'],
-		// omnibox: {
-		// 	keyword: (extensionManifest.name || npmManifest.name)
-		// }
+		web_accessible_resources: [
+			'static/**/*',
+			'*.js.map',
+			'*.css.map'
+		]
 	}
+
+	manifest = deepmerge(manifest, extensionManifest)
+
+	if (devRun) {
+		manifest.content_security_policy = manifest.content_security_policy
+			.replace('script-src', 'script-src http://localhost:35729')
+			.replace('default-src', 'default-src http://localhost:35729')
+			.replace('connect-src', 'connect-src ws://localhost:35729')
+
+		if (manifest.background) {
+			manifest.background.persistent = true
+		}
+	}
+
 
 	neutrino.config
 		.plugin('webextension-manifest')
 		.use(GenerateJsonPlugin, [
 			MANIFEST_NAME,
-			deepmerge(manifest, extensionManifest),
+			manifest,
 			null,
 			3
 		])

@@ -11,41 +11,28 @@ let fontLoader = require('@neutrinojs/font-loader')
 let imageLoader = require('@neutrinojs/image-loader')
 let htmlLoader = require('@neutrinojs/html-loader');
 let env = require('@neutrinojs/env')
-let deepmerge = require('deepmerge')
 let arrify = require('arrify')
 let hotReload = require('./hot-reload.js')
 let babel = require('./babel.js')
-let htmlTemplate = require('./html-template.js')
+// let htmlTemplate = require('./html-template.js')
 let webextensionManifest = require('./webextension-manifest.js')
+let webextensionEntries = require('./webextension-entries.js')
+let livereload =  require('./livereload.js')
+let requireManifest = require('./utils/require-manifest')
+let merge = require('./utils/merge')
 
 module.exports = function (neutrino, settings = {}) {
 	const NODE_MODULES = path.resolve(__dirname, '../node_modules')
 	const PROJECT_NODE_MODULES = path.resolve(process.cwd(), 'node_modules')
 	let config = neutrino.config
+	let src = neutrino.options.source
 	let testRun = (process.env.NODE_ENV === 'test')
 	let devRun = (process.env.NODE_ENV === 'development')
 	let lintRule = config.module.rules.get('lint')
 	let eslintLoader = lintRule && lintRule.uses.get('eslint')
-	let staticDirPath = path.join(neutrino.options.source, 'static')
-	let localesDirPath = path.join(neutrino.options.source, '_locales')
-	let mains = {
-		'background': path.resolve(neutrino.options.source, 'background'),
-		'content': path.resolve(neutrino.options.source, 'content'),
-		// 'browser-popup': path.resolve(neutrino.options.source, 'browser-popup'),
-		'page-popup': path.resolve(neutrino.options.source, 'page-popup'),
-		// 'options': path.resolve(neutrino.options.source, 'options')
-	}
-	let pages = [
-		// 'browser-popup', 
-		'page-popup', 
-		// 'options'
-	]
-
-	function mergeWith(options = {}){
-		return function(opts = {}){
-			return deepmerge(opts, options)
-		}
-	}
+	let staticDirPath = path.join(src, 'static')
+	let localesDirPath = path.join(src, '_locales')
+	let manifest = requireManifest(src)
 
 	if (!settings.browsers) {
 		settings.browsers = [
@@ -56,15 +43,9 @@ module.exports = function (neutrino, settings = {}) {
 			'edge >=14' //march 2016
 		]
 	}
-
-	neutrino.options.mains = mains
-
-	Object.keys(mains).forEach(function(key) {
-		config.entry(key).add(mains[key])
-	})
-
+	
 	config
-		.devtool(devRun ? 'eval-source-map' : 'source-map')
+		.devtool(devRun ? 'inline-source-map' : 'source-map')
 		.target('web')
 		.context(neutrino.options.root)
 		.entry('polyfill')
@@ -108,7 +89,7 @@ module.exports = function (neutrino, settings = {}) {
 			.end()
 
 	neutrino.use(env)
-	neutrino.use(htmlLoader);
+	// neutrino.use(htmlLoader);
 	neutrino.use(babel, {
 		include: [
 			neutrino.options.source,
@@ -120,18 +101,19 @@ module.exports = function (neutrino, settings = {}) {
 		],
 		browsers: settings.browsers
 	})
-	pages.forEach(function(name, index) {
-		neutrino.use(htmlTemplate, {
-			plugin: `html-${index}`,
-			filename: `${name}.html`,
-			chunks: [name, 'runtime', 'polyfill']
-		})
-	})
+	// pages.forEach(function(name, index) {
+	// 	neutrino.use(htmlTemplate, {
+	// 		id: index,
+	// 		filename: `${name}.html`,
+	// 		chunks: [name, 'runtime', 'polyfill']
+	// 	})
+	// })
 	neutrino.use(styleLoader)
 	neutrino.use(fontLoader)
 	neutrino.use(imageLoader)
 	neutrino.use(clean, { paths: [neutrino.options.output] })
-	neutrino.use(webextensionManifest)
+	neutrino.use(webextensionEntries, manifest)
+	neutrino.use(webextensionManifest, manifest)
 	neutrino.use(copy, {
 		options: {
 			pluginId: 'copy-static'
@@ -159,6 +141,7 @@ module.exports = function (neutrino, settings = {}) {
 
 	if (devRun) {
 		// neutrino.use(hotReload, settings.server)
+		neutrino.use(livereload)
 	}
 	else {
 		// neutrino.use(minify)
@@ -168,13 +151,8 @@ module.exports = function (neutrino, settings = {}) {
 		lintRule
 			.pre()
 		eslintLoader
-			.tap(mergeWith({
-				envs: ['browser', 'commonjs'],
-				parserOptions: {
-					ecmaFeatures: {
-						experimentalObjectRestSpread: true
-					}
-				}
+			.tap(merge({
+				envs: ['browser', 'commonjs', 'webextensions']
 			}))
 	}
 }
