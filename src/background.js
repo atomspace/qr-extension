@@ -1,1 +1,3 @@
-console.log('Oraoraoraora');
+// browser.pageAction.onClicked.addListener(() => {
+    
+// });
