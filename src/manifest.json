@@ -11,7 +11,8 @@
 		}
 	],
 	"page_action": {
-		"default_title": "URL to QR"
+		"default_title": "URL to QR",
+		"default_popup": "page-popup.html"
 	},
 	"permissions": [
 		"contextMenus",
