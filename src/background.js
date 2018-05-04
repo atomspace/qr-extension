@@ -5,3 +5,7 @@ setInterval(function () {
 }, 2000);
 
 console.log('Oraoraoraora');
+
+// browser.pageAction.onClicked.addListener(() => {
+    
+// });
