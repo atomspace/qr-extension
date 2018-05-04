@@ -1,3 +1,1 @@
-require("./conrollers/.js");
-require("./conrollers/.js");
-require("./conrollers/.js")
+require('src/controllers/controller');

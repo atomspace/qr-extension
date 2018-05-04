@@ -1,8 +1,7 @@
-var qr = require('qr-encode');
-var $ = require("jquery");
-var manipulator = require('img-mainipulator.js');
+let qr = require('qr-encode');
+let manipulator = require('src/services/img-mainipulator.js');
 
-$("#buttonQR").on('click',() => {
-    manipulator.append();
-    manipulator.remove();
+messageChannel.onMessage('show-qr', function () {
+	manipulator.append();
+	manipulator.remove();
 });

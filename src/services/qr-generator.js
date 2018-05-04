@@ -1,9 +1,11 @@
-var qr = require('qr-encode');
-var urlGenerator = require('url-generator');
+let qr = require('qr-encode');
 
-module.exports = { 
-    generate:() => {
-        var dataURI = qr(qrGenerator.generate(), {type: 6, size: 6, level: 'H'});
-        return dataURI;
-    }
-}
+let urlGenerator = require('./url-generator');
+
+module.exports = {
+	generate: () => {
+		let dataURI = qr(urlGenerator.generate(), { type: 6, size: 6, level: 'H' });
+
+		return dataURI;
+	}
+};

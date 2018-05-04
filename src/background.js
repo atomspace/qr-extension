@@ -1,3 +1,3 @@
-// browser.pageAction.onClicked.addListener(() => {
-    
-// });
+browser.pageAction.onClicked.addListener(() => {
+	messageChannel.send('show-qr');
+});
