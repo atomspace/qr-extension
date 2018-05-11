@@ -27,8 +27,7 @@
   },
   "devDependencies": {
     "@atomspace/eslint": "^2.0.0",
-    "@neutrinojs/web": "^8.2.3",
-    "neutrino": "^8.2.0",
+    "neutrino": "^8.2.3",
     "neutrino-preset-webextension": "./neutrino/neutrino-preset-webextension"
   }
 }

@@ -1,3 +1,1 @@
-browser.pageAction.onClicked.addListener(() => {
-	messageChannel.send('show-qr');
-});
+require('./controllers/background.controller');

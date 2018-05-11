@@ -1,15 +1,18 @@
-let qrGenerator = require('qr-generator.js');
+let qrGenerator = require('./qr-generator');
+
+const DELAY = 1000;
 
 module.exports = {
-	append: () => {
-		let img = new Image();
+	img: new Image(),
 
-		img.src = qrGenerator.generate();
-		document.body.appendChild(img);
+	append () {
+
+		this.img.src = qrGenerator.generate();
+		document.body.appendChild(this.img);
 	},
-	remove: time => {
+	remove (time) {
 		setTimeout(() => {
-			document.body.removeChild(img);
-		}, time || 1000);
+			document.body.removeChild(this.img);
+		}, time || DELAY);
 	}
 };

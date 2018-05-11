@@ -17,13 +17,13 @@ module.exports = function (neutrino, extensionManifest = {}) {
 
 		background: extensionManifest.background ? {
 			persistent: true, //https://developer.chrome.com/extensions/event_pages
-			scripts: ['runtime.js', 'polyfill.js']
+			scripts: ['runtime.js']
 		} : undefined,
 
 		content_scripts: extensionManifest.content_scripts ? [
 			{
 				matches: ['<all_urls>'],
-				js: ['runtime.js', 'polyfill.js'],
+				js: ['runtime.js'],
 				all_frames: true
 			}
 		] : undefined,
