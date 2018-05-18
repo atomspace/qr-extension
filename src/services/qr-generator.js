@@ -3,8 +3,8 @@ let qr = require('qr-encode');
 let urlGenerator = require('./url-generator');
 
 module.exports = {
-	generate: () => {
-		let dataURI = qr(urlGenerator.generate(), { type: 6, size: 6, level: 'H' });
+	generate: text => {
+		let dataURI = qr(urlGenerator.generator(text), { type: 6, size: 9, level: 'H' });
 
 		return dataURI;
 	}

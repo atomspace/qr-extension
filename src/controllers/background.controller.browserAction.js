@@ -1,7 +1,5 @@
 let messageChannel = require('../services/message-channel');
 
-chrome.pageAction.onClicked.addListener(() => {
+chrome.browserAction.onClicked.addListener(() => {
 	messageChannel.sendMessage('signal', { success: true });
-	console.log("click!");
 });
-
