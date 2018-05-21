@@ -1,13 +1,7 @@
 let messageChannel = require('../services/message-channel');
 
-let browserAction = window.browser && window.browser.browserAction;
-let chromeAction = window.chrome && window.chrome.browserAction;
-let browser;
+let extension = window.chrome || (typeof browser === 'object') && browser;
 
-if (chromeAction) {
-	browser = chrome;
-}
-
-chrome.browserAction.onClicked.addListener(() => {
+extension.browserAction.onClicked.addListener(() => {
 	messageChannel.sendMessage('signal', { success: true });
 });
