@@ -5,18 +5,19 @@ chrome.contextMenus.create({
 	title: 'Make QR',
 	contexts: ['selection', 'link']
 }, () => {
-	console.log('Context Menus is realy awesome');
+
+	// console.log('Context Menus is realy awesome');
 });
 
 browser.contextMenus.onClicked.addListener(function (info) {
-	var contextMessage = info.selectionText;
 
 	switch (info.menuItemId) {
 		case 'qr-creator':
-			messageChannel.sendMessage('context', { success: true });
-			console.log(info.selectionText);
+			messageChannel.sendMessage('context', { contextMessage: info.selectionText });
+
+			// console.log(info.selectionText);
 			break;
 	}
 });
 
-module.exports = contextMessage;
+// module.exports = contextMessage;
