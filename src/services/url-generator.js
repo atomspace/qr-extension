@@ -1,5 +1,5 @@
 module.exports = {
-	generator: text => {
+	generate: text => {
 		return text || location.href;
 	}
 };

@@ -1,23 +1,42 @@
 let messageChannel = require('../services/message-channel');
 
-chrome.contextMenus.create({
-	id: 'qr-creator',
-	title: 'Make QR',
-	contexts: ['selection', 'link']
-}, () => {
+let browserAction = window.browser && window.browser.browserAction;
+let chromeAction = window.chrome && window.chrome.browserAction;
+let browser;
 
-	// console.log('Context Menus is realy awesome');
+if (chromeAction) {
+	browser = chrome;
+}
+
+browser.contextMenus.create({
+	id: 'qr-link',
+	title: 'Make QR from link',
+	contexts: ['link']
+});
+
+browser.contextMenus.create({
+	id: 'qr-text',
+	title: 'Make QR from text',
+	contexts: ['selection']
+});
+
+browser.contextMenus.create({
+	id: 'qr-image',
+	title: 'Make QR from image',
+	contexts: ['image']
 });
 
 browser.contextMenus.onClicked.addListener(function (info) {
-
 	switch (info.menuItemId) {
-		case 'qr-creator':
+		case 'qr-text':
+			messageChannel.sendMessage('context', { contextMessage: info.selectionText });
+			break;
+		case 'qr-link':
 			messageChannel.sendMessage('context', { contextMessage: info.selectionText });
 
-			// console.log(info.selectionText);
+			break;
+		case 'qr-iamge':
+			messageChannel.sendMessage('context', { contextMessage: info.selectionText });
 			break;
 	}
 });
-
-// module.exports = contextMessage;

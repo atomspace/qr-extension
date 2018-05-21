@@ -1,3 +1,5 @@
+let $ = require('jquery');
+
 let qrGenerator = require('./qr-generator');
 
 let qrBackground;
@@ -26,11 +28,16 @@ module.exports = {
 
 		qrBackground.appendChild(this.img);
 
-		qrBackground.setAttribute('onclick', 'remove()');
+		// qrBackground.setAttribute('onclick', 'remove()');
 		document.body.appendChild(qrBackground);
 	},
 	remove () {
-		qrBackground.removeChild(qrBackground);
+		// $('img').on('click', function () {
+		// 	qrBackground.remove(qrBackground);
+		// });
 
+		$('body').on('click', function () {
+			qrBackground.remove(qrBackground);
+		});
 	}
 };
