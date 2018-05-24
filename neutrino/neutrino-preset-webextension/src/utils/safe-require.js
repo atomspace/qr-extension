@@ -1,10 +1,8 @@
-'use strict'
-
-module.exports = function(filePath){
+module.exports = function (filePath) {
 	try {
-		return require(filePath)
+		return require(filePath);
 	}
-	catch(err){
+	catch (err) {
 		return undefined;
 	}
-}
+};

@@ -1,38 +1,38 @@
-'use strict'
+let path = require('path');
 
-let path = require('path')
+let chunk = require('@neutrinojs/chunk');
+let clean = require('@neutrinojs/clean');
+let copy = require('@neutrinojs/copy');
 
-let chunk = require('@neutrinojs/chunk')
-let clean = require('@neutrinojs/clean')
-let copy = require('@neutrinojs/copy')
-let minify = require('@neutrinojs/minify')
-let styleLoader = require('@neutrinojs/style-loader')
-let fontLoader = require('@neutrinojs/font-loader')
-let imageLoader = require('@neutrinojs/image-loader')
+// let minify = require('@neutrinojs/minify')
+let styleLoader = require('@neutrinojs/style-loader');
+let fontLoader = require('@neutrinojs/font-loader');
+let imageLoader = require('@neutrinojs/image-loader');
+
 // let htmlLoader = require('@neutrinojs/html-loader');
-let env = require('@neutrinojs/env')
-let arrify = require('arrify')
-let hotReload = require('./hot-reload.js')
-let babel = require('./babel.js')
-// let htmlTemplate = require('./html-template.js')
-let webextensionManifest = require('./webextension-manifest.js')
-let webextensionEntries = require('./webextension-entries.js')
-let livereload =  require('./livereload.js')
-let requireManifest = require('./utils/require-manifest')
-let merge = require('./utils/merge')
+let env = require('@neutrinojs/env');
+
+// let arrify = require('arrify')
+// let hotReload = require('./hot-reload.js')
+let babel = require('./babel.js');
+let webextensionManifest = require('./webextension-manifest.js');
+let webextensionEntries = require('./webextension-entries.js');
+let liveReload = require('./live-reload.js');
+let requireManifest = require('./utils/require-manifest');
+let merge = require('./utils/merge');
 
 module.exports = function (neutrino, settings = {}) {
-	const NODE_MODULES = path.resolve(__dirname, '../node_modules')
-	const PROJECT_NODE_MODULES = path.resolve(process.cwd(), 'node_modules')
-	let config = neutrino.config
-	let src = neutrino.options.source
-	let testRun = (process.env.NODE_ENV === 'test')
-	let devRun = (process.env.NODE_ENV === 'development')
-	let lintRule = config.module.rules.get('lint')
-	let eslintLoader = lintRule && lintRule.uses.get('eslint')
-	let staticDirPath = path.join(src, 'static')
-	let localesDirPath = path.join(src, '_locales')
-	let manifest = requireManifest(src)
+	const NODE_MODULES = path.resolve(__dirname, '../node_modules');
+	const PROJECT_NODE_MODULES = path.resolve(process.cwd(), 'node_modules');
+	let config = neutrino.config;
+	let src = neutrino.options.source;
+	let testRun = (process.env.NODE_ENV === 'test');
+	let devRun = (process.env.NODE_ENV === 'development');
+	let lintRule = config.module.rules.get('lint');
+	let eslintLoader = lintRule && lintRule.uses.get('eslint');
+	let staticDirPath = path.join(src, 'static');
+	let localesDirPath = path.join(src, '_locales');
+	let manifest = requireManifest(src);
 
 	if (!settings.browsers) {
 		settings.browsers = [
@@ -40,10 +40,10 @@ module.exports = function (neutrino, settings = {}) {
 			'firefoxandroid >=48',
 			'chrome >=17',
 			'opera >=15',
-			'edge >=14' //march 2016
-		]
+			'edge >=14' // march 2016
+		];
 	}
-	
+
 	config
 		.devtool(devRun ? 'inline-source-map' : 'source-map')
 		.target('web')
@@ -62,6 +62,7 @@ module.exports = function (neutrino, settings = {}) {
 			.add('.json')
 			.end().end()
 		.resolve.alias
+
 			// Make sure 2 versions of "core-js" always match in package.json and babel-polyfill/package.json
 			.set('core-js', path.dirname(require.resolve('core-js')))
 			.end().end()
@@ -86,9 +87,10 @@ module.exports = function (neutrino, settings = {}) {
 			.set('setImmediate', true)
 			.set('fs', 'empty')
 			.set('tls', 'empty')
-			.end()
+			.end();
 
-	neutrino.use(env)
+	neutrino.use(env);
+
 	// neutrino.use(htmlLoader);
 	neutrino.use(babel, {
 		include: [
@@ -100,20 +102,13 @@ module.exports = function (neutrino, settings = {}) {
 			staticDirPath
 		],
 		browsers: settings.browsers
-	})
-	// pages.forEach(function(name, index) {
-	// 	neutrino.use(htmlTemplate, {
-	// 		id: index,
-	// 		filename: `${name}.html`,
-	// 		chunks: [name, 'runtime', 'polyfill']
-	// 	})
-	// })
-	neutrino.use(styleLoader)
-	neutrino.use(fontLoader)
-	neutrino.use(imageLoader)
-	neutrino.use(clean, { paths: [neutrino.options.output] })
-	neutrino.use(webextensionEntries, manifest)
-	neutrino.use(webextensionManifest, manifest)
+	});
+	neutrino.use(styleLoader);
+	neutrino.use(fontLoader);
+	neutrino.use(imageLoader);
+	neutrino.use(clean, { paths: [neutrino.options.output] });
+	neutrino.use(webextensionEntries, manifest);
+	neutrino.use(webextensionManifest, manifest);
 	neutrino.use(copy, {
 		options: {
 			pluginId: 'copy-static'
@@ -123,7 +118,7 @@ module.exports = function (neutrino, settings = {}) {
 			from: '**/*',
 			to: path.basename(staticDirPath)
 		}]
-	})
+	});
 	neutrino.use(copy, {
 		options: {
 			pluginId: 'copy-locales'
@@ -133,15 +128,15 @@ module.exports = function (neutrino, settings = {}) {
 			from: '**/*',
 			to: path.basename(localesDirPath)
 		}]
-	})
+	});
 
 	if (!testRun) {
-		neutrino.use(chunk)
+		neutrino.use(chunk);
 	}
 
 	if (devRun) {
 		// neutrino.use(hotReload, settings.server)
-		neutrino.use(livereload)
+		neutrino.use(liveReload);
 	}
 	else {
 		// neutrino.use(minify)
@@ -149,10 +144,10 @@ module.exports = function (neutrino, settings = {}) {
 
 	if (eslintLoader) {
 		lintRule
-			.pre()
+			.pre();
 		eslintLoader
 			.tap(merge({
 				envs: ['browser', 'commonjs', 'webextensions']
-			}))
+			}));
 	}
-}
+};

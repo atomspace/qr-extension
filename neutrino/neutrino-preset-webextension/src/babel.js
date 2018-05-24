@@ -1,14 +1,13 @@
-'use strict'
+let path = require('path');
 
-let arrify = require('arrify')
-let path = require('path')
-let deepmerge = require('deepmerge')
+let arrify = require('arrify');
+let deepmerge = require('deepmerge');
 
 module.exports = function (neutrino, settings = {}) {
-	const NODE_MODULES = path.resolve(__dirname, '../node_modules')
-	let config = neutrino.config
-	let compileRule = config.module.rule('compile')
-	let compileRuleExtensions = arrify(compileRule.get('test'))
+	const NODE_MODULES = path.resolve(__dirname, '../node_modules');
+	let config = neutrino.config;
+	let compileRule = config.module.rule('compile');
+	let compileRuleExtensions = arrify(compileRule.get('test'));
 
 	if (!settings.browsers) {
 		settings.browsers = [
@@ -26,7 +25,7 @@ module.exports = function (neutrino, settings = {}) {
 			'last 2 op_mini versions',
 			'ios >= 8',
 			'android >= 4'
-		]
+		];
 	}
 
 	compileRule
@@ -59,5 +58,5 @@ module.exports = function (neutrino, settings = {}) {
 					require.resolve('babel-plugin-transform-class-properties')
 				]
 			}))
-			.end()
-}
+			.end();
+};
