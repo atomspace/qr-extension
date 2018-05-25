@@ -1,2 +1,2 @@
-require('./controllers/background.controller.browserAction');
-require('./controllers/background.controller.contextMenus');
+require('./controllers/background.browser-action.controller');
+require('./controllers/background.context-menu.controller');
