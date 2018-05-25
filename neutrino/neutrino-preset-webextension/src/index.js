@@ -17,6 +17,7 @@ let env = require('@neutrinojs/env');
 let babel = require('./babel.js');
 let webextensionManifest = require('./webextension-manifest.js');
 let webextensionEntries = require('./webextension-entries.js');
+let webextensionPackager = require('./webextension-packager.js');
 let liveReload = require('./live-reload.js');
 let requireManifest = require('./utils/require-manifest');
 let merge = require('./utils/merge');
@@ -109,6 +110,7 @@ module.exports = function (neutrino, settings = {}) {
 	neutrino.use(clean, { paths: [neutrino.options.output] });
 	neutrino.use(webextensionEntries, manifest);
 	neutrino.use(webextensionManifest, manifest);
+	neutrino.use(webextensionPackager, manifest);
 	neutrino.use(copy, {
 		options: {
 			pluginId: 'copy-static'
