@@ -15,7 +15,6 @@
 	},
 	"permissions": [
 		"contextMenus",
-		"topSites",
 		"activeTab"
 	],
 	"icons": {
@@ -27,8 +26,5 @@
 		"48": "static/icons/icon-48.png",
 		"64": "static/icons/icon-64.png",
 		"128": "static/icons/icon-128.png"
-	},
-	"omnibox": {
-		"keyword": "qr"
 	}
 }
