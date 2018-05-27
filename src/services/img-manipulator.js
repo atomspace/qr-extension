@@ -24,14 +24,21 @@ module.exports = {
 		// qrBackground.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
 
 		this.img.src = qrGenerator.generate(text);
-		this.img.style.position = 'relative';
-		this.img.style.left = '50%';
-		this.img.style.top = '50%';
-		this.img.style.marginLeft = '-185px';
-		this.img.style.marginTop = '-185px';
+		let qrImage = this.img;
+
+		$(qrImage).css({
+			position: 'relative', left: '50%', top: '50%', marginLeft: '-185px',
+			marginTop: '-185px'
+		});
+
+		// this.img.style.position = 'relative';
+		// this.img.style.left = '50%';
+		// this.img.style.top = '50%';
+		// this.img.style.marginLeft = '-185px';
+		// this.img.style.marginTop = '-185px';
 
 
-		qrBackground.appendChild(this.img);
+		qrBackground.appendChild(qrImage);
 
 		// qrBackground.setAttribute('onclick', 'remove()');
 		// document.body.appendChild(qrBackground);
@@ -39,7 +46,8 @@ module.exports = {
 	},
 	remove () {
 		$('body').on('click', function () {
-			qrBackground.remove(qrBackground);
+			// qrBackground.remove(qrBackground);
+			qrBackground.remove();
 		});
 	}
 };
