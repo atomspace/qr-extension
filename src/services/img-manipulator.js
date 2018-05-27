@@ -9,14 +9,19 @@ module.exports = {
 	img: new Image(),
 
 	append (text) {
-		qrBackground = document.createElement('div');
+		qrBackground = $('<div>');
 
 		qrBackground.style.position = 'fixed';
-		qrBackground.style.width = '100%';
-		qrBackground.style.height = '100%';
-		qrBackground.style.top = '0';
-		qrBackground.style.zIndex = '100';
-		qrBackground.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+		$(qrBackground).css({
+			position: 'fixed', width: '100%', height: '100%',
+			top: '0', zIndex: '100', backgroundColor: 'rgba(0, 0, 0, 0.5)'
+		});
+
+		// qrBackground.style.width = '100%';
+		// qrBackground.style.height = '100%';
+		// qrBackground.style.top = '0';
+		// qrBackground.style.zIndex = '100';
+		// qrBackground.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
 
 		this.img.src = qrGenerator.generate(text);
 		this.img.style.position = 'relative';
@@ -29,13 +34,10 @@ module.exports = {
 		qrBackground.appendChild(this.img);
 
 		// qrBackground.setAttribute('onclick', 'remove()');
-		document.body.appendChild(qrBackground);
+		// document.body.appendChild(qrBackground);
+		$('body').append(qrBackground);
 	},
 	remove () {
-		// $('img').on('click', function () {
-		// 	qrBackground.remove(qrBackground);
-		// });
-
 		$('body').on('click', function () {
 			qrBackground.remove(qrBackground);
 		});
