@@ -18,13 +18,13 @@
 		"activeTab"
 	],
 	"icons": {
-		"16": "static/icons/icon-16.png",
-		"24": "static/icons/icon-24.png",
-		"19": "static/icons/icon-19.png",
-		"32": "static/icons/icon-32.png",
-		"38": "static/icons/icon-38.png",
-		"48": "static/icons/icon-48.png",
-		"64": "static/icons/icon-64.png",
-		"128": "static/icons/icon-128.png"
+		"16": "icons/icon-16.png",
+		"24": "icons/icon-24.png",
+		"19": "icons/icon-19.png",
+		"32": "icons/icon-32.png",
+		"38": "icons/icon-38.png",
+		"48": "icons/icon-48.png",
+		"64": "icons/icon-64.png",
+		"128": "icons/icon-128.png"
 	}
 }
