@@ -25,8 +25,8 @@
     "qr-encode": "0.3.0"
   },
   "devDependencies": {
-	 "@atomspace/eslint": "~2.1.0",
-	 "@atomspace/webextension": "~1.0.0",
+	 "@atomspace/eslint": "~2.1.1",
+	 "@atomspace/webextension": "~0.2.2",
     "neutrino": "~8.2.3"
   }
 }
