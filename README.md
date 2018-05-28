@@ -1,30 +1,16 @@
 # qr-extension
+qr-extension is a browser extension to generate a QR-code from the page address. There are to ways,how to create qr-code: Page action and context menu. Click on the page action means, that you want to create qr from page URL. If you do it using context menu, you can make qr from text/link/image.
+## Version
+0.1.1
+## Authors
+**Constantine Genchevsky** - https://github.com/constgen
 
-A browser extension to generate a QR-code from the page address
+**Artyom Maximov** - https://github.com/Artefall
 
-## Features:
+**Michael Chumachenko** - https://github.com/PyTechMike
+## License
+GNU
+## Publisher
+**Artyom Maximov** - https://github.com/Artefall
 
-~~1. Перевод текста в код~~
-~~2. Вставка картинки с кодом на страницу~~
-   ~~1. Создание HTML элементов на JavaScript~~
-   ~~2. Вставка HTML элементов в документ~~
-   ~~3. Удаление HTML элементов из документа~~
-	~~4. Вставка стилей на JavaScript~~
-~~3. Упаковать приложение в расширение~~
-~~4. Добавление иконки расширения в адресную строку~~
-5. Добавление в контекстное меню браузера
-~~6. Иконки расширения~~
-
-// 1. Слушать событие клика на иконке
-// 2. Преобразовывать текущий адрес в QR code
-// 3. Показать QR код поверх страницы только на текущей вкладке
-var display = require('../serices/display')
-
-messageChannel.onMessage('show-qr', function(){
-    var url = ''
-    display.showImage('')
-})
-
-setTimeout(function(){
-    messageChannel.send('show-qr')
-}, 2000)
+# KOLHOZNO,ZATO EST
