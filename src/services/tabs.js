@@ -9,6 +9,16 @@ module.exports = {
 			let err = runtime.lastError; // eslint-disable-line no-unused-vars
 		});
 	},
+	getAll () {
+		if (!detected) return Promise.resolve();
+		return new Promise(function (resolve, reject) {
+			let promise = tabs.query({}, resolve);
+
+			if (promise && promise.then) {
+				promise.then(resolve).catch(reject);
+			}
+		});
+	},
 	getCurrent () {
 		if (!detected) return Promise.resolve();
 		return new Promise(function (resolve, reject) {
@@ -27,6 +37,11 @@ module.exports = {
 	getCurrentId () {
 		return module.exports.getCurrent().then(function (tab) {
 			return tab && tab.id;
+		});
+	},
+	onUpdated (callback) {
+		tabs.onUpdated.addListener(function (id, changeInfo, tab) {
+			callback(tab);
 		});
 	}
 };
