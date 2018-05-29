@@ -24,13 +24,15 @@ extension.contextMenus.onClicked.addListener(function (info) {
 	switch (info.menuItemId) {
 		case 'qr-text':
 			messageChannel.sendMessage('context', { contextMessage: info.selectionText });
+			chrome.contextMenus.remove('qr-text');
 			break;
 		case 'qr-link':
 			messageChannel.sendMessage('context', { contextMessage: info.selectionText });
-
+			chrome.contextMenus.remove('qr-link');
 			break;
 		case 'qr-iamge':
 			messageChannel.sendMessage('context', { contextMessage: info.selectionText });
+			chrome.contextMenus.remove('qr-image');
 			break;
 	}
 });
