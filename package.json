@@ -29,5 +29,6 @@
     "@atomspace/eslint": "^2.1.0",
     "neutrino": "^8.2.3",
     "neutrino-preset-webextension": "./neutrino/neutrino-preset-webextension"
-  }
+  },
+  "private":true
 }
