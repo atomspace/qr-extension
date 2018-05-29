@@ -1,6 +1,7 @@
 {
   "name": "qr-extension",
-  "version": "0.1.1",
+  "version": "0.2.0",
+  "private": true,
   "description": "A browser extension to generate a QR-code from the page address",
   "main": "index.js",
   "scripts": {
@@ -21,14 +22,12 @@
   },
   "homepage": "https://github.com/atomspaceodua/qr-extension#readme",
   "dependencies": {
-    "generate-json-webpack-plugin": "^0.3.1",
     "jquery": "^3.3.1",
     "qr-encode": "0.3.0"
   },
   "devDependencies": {
-    "@atomspace/eslint": "^2.1.0",
-    "neutrino": "^8.2.3",
-    "neutrino-preset-webextension": "./neutrino/neutrino-preset-webextension"
-  },
-  "private":true
+	  "@atomspace/eslint": "~2.1.1",
+	  "@atomspace/webextension": "~0.2.2",
+    "neutrino": "~8.2.3"
+  }
 }
