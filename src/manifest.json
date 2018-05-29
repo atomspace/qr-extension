@@ -10,7 +10,7 @@
 			"js": ["content.js"]
 		}
 	],
-	"browser_action": {
+	"page_action": {
 		"default_title": "URL to QR"
 	},
 	"permissions": [
