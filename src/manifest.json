@@ -15,7 +15,8 @@
 	},
 	"permissions": [
 		"contextMenus",
-		"activeTab"
+		"activeTab",
+		"tabs"
 	],
 	"icons": {
 		"16": "icons/icon-16.png",
