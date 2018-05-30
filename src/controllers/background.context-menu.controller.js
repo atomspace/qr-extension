@@ -2,17 +2,23 @@ let messageChannel = require('../services/message-channel');
 
 let extension = window.chrome || (typeof browser === 'object') && browser;
 
+extension.contextMenus.remove('qr-link');
+
 extension.contextMenus.create({
 	id: 'qr-link',
 	title: 'Make QR from link',
 	contexts: ['link']
 });
 
+extension.contextMenus.remove('qr-text');
+
 extension.contextMenus.create({
 	id: 'qr-text',
 	title: 'Make QR from text',
 	contexts: ['selection']
 });
+
+extension.contextMenus.remove('qr-image');
 
 extension.contextMenus.create({
 	id: 'qr-image',
@@ -24,15 +30,12 @@ extension.contextMenus.onClicked.addListener(function (info) {
 	switch (info.menuItemId) {
 		case 'qr-text':
 			messageChannel.sendMessage('context', { contextMessage: info.selectionText });
-			chrome.contextMenus.remove('qr-text');
 			break;
 		case 'qr-link':
 			messageChannel.sendMessage('context', { contextMessage: info.selectionText });
-			chrome.contextMenus.remove('qr-link');
 			break;
 		case 'qr-iamge':
 			messageChannel.sendMessage('context', { contextMessage: info.selectionText });
-			chrome.contextMenus.remove('qr-image');
 			break;
 	}
 });
