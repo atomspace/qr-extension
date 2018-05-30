@@ -1,38 +1,38 @@
 {
-	"name": "qr-extension",
-	"version": "0.2.0",
-	"private": true,
-	"description": "A browser extension to generate a QR-code from the page address",
-	"main": "index.js",
-	"scripts": {
-		"pretest": "neutrino lint",
-		"start": "neutrino start",
-		"build": "neutrino build",
-		"lint": "neutrino lint --fix"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/atomspaceodua/qr-extension.git"
-	},
-	"keywords": [],
-	"author": "Atom Space",
-	"license": "GPL-3.0",
-	"bugs": {
-		"url": "https://github.com/atomspaceodua/qr-extension/issues"
-	},
-	"homepage": "https://github.com/atomspaceodua/qr-extension/blob/master/README.md",
-	"dependencies": {
-		"jquery": "^3.3.1",
-		"qr-encode": "0.3.0"
-	},
-	"devDependencies": {
-		"@atomspace/eslint": "~2.1.1",
-		"@atomspace/webextension": "~0.2.2",
-		"neutrino": "~8.2.3"
-	},
-	"contributors": [
-		"Constantin Genchevskiy <const.gen@gmail.com>",
-		"Maximov Artyom <maximov.artyom007@gmail.com>",
-		"Michael Chumachenko <pytechmike@gmail.com>"
-	]
+  "name": "qr-extension",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A browser extension to generate a QR-code from the page address",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "neutrino lint",
+    "start": "neutrino start",
+    "build": "neutrino build",
+    "lint": "neutrino lint --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atomspaceodua/qr-extension.git"
+  },
+  "keywords": [],
+  "author": "Atom Space",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/atomspaceodua/qr-extension/issues"
+  },
+  "homepage": "https://github.com/atomspaceodua/qr-extension/blob/master/README.md",
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "qr-encode": "0.3.0"
+  },
+  "devDependencies": {
+    "@atomspace/eslint": "~2.1.1",
+    "@atomspace/webextension": "~0.2.2",
+    "neutrino": "~8.2.3"
+  },
+  "contributors": [
+    "Constantin Genchevskiy <const.gen@gmail.com>",
+    "Maximov Artyom <maximov.artyom007@gmail.com>",
+    "Michael Chumachenko <pytechmike@gmail.com>"
+  ]
 }
