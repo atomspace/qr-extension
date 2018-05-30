@@ -4,5 +4,5 @@ qr-extension is a browser extension to generate a QR-code from the page address.
 
 ## Downloads
 
-* [Manual installation from archive](https://github.com/atomspaceodua/qr-extension/releases/download/v1.0.0/qr-extension-1.0.0.zip)
+* [Manual installation from an archive](https://github.com/atomspaceodua/qr-extension/releases/download/v1.0.0/qr-extension-1.0.0.zip)
 * [Opera Extension Store](https://addons.opera.com/extensions/details/qr-extension/) 
