@@ -8,6 +8,7 @@ cache:
   - node_modules
 script:
   - npm test
+  - npm run build
 notifications:
   email:
     on_pull_requests: false
@@ -17,7 +18,7 @@ deploy:
   provider: releases
   api_key: "$GITHUB_AUTH_TOKEN"
   file_glob: true
-  file: "dist/*"
+  file: dist/*
   overwrite: true
   skip_cleanup: true
   on:
