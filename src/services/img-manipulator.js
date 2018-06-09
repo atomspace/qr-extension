@@ -22,7 +22,7 @@ module.exports = {
 
 			$(this.img).css({
 				position: 'relative', left: '50%', top: '50%', marginLeft: '-250px',
-				marginTop: '-250px', border: '30px solid white'
+				marginTop: '-250px', border: '5px solid white'
 			});
 
 			$(qrBackground).append(this.img);
