@@ -30,6 +30,21 @@ For compiling project, we use [Neutrino](https://www.npmjs.com/package/neutrino)
 
 ```"npm build"``` - provides to compile prodction version. It differ from "npm start" in a way, that if you will enter this commands with warnings, it won't let you to do that and it will throw exeption.
 
+Both commands create folder "build" in your project - this is your ready extension. Next step - integration with browsers 
+
+
+## Integration with browsers
+
+Integration with each browser looks about the same, but can differ:
+
+### Opera
+
+1. Press keyboard shotrcut Ctrl+Shift+E or "Opera home panel >> Extensions >> Extensions" to open page with your extensions.
+2. Push folder with extension to the window with extensions in opera browser.
+3. Restart Opera browser.
+
+After restart you can see an qr-extension icon ![alt text](https://github.com/atomspace/qr-extension/blob/master/src/icons/icon-16.png "qr-extension logo") on page action of Opera browser. 
+
 ## Downloads
 
 * [Manual installation from an archive](https://github.com/atomspaceodua/qr-extension/releases/download/v1.0.0/qr-extension-1.0.0.zip)
